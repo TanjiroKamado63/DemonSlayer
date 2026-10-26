@@ -1,0 +1,84 @@
+                   Practical No. 04 - Simple Linear Regression using R
+
+# Q1. Study Hours vs Marks - Simple Linear Regression
+
+cat('\014')
+study_hrs <- c(2,3,4,5,6,7,8,9,10,11)
+marks <- c(45,50,54,61,65,70,74,80,85,88)
+df <- data.frame(study_hrs,marks)
+model <- lm(marks~study_hrs)
+print(summary(model))
+eq <- coef(model)
+b0 <- eq[1]
+b1 <- eq[2]
+cat("Regression Equation : y=",b0,"+",b1,"x")
+ans <- predict(model,data.frame(study_hrs=7.5))
+cat("\nPredicted Marks of a student who studies for 7.5 hours = ",ans)
+plot(study_hrs,marks,main="Marks vs Study Hours",xlab="Study Hours",ylab="Marks",xlim=c(0,12),ylim=c(0,100))
+abline(model,col="red")
+
+
+# Q2. Predict Weight using Women Dataset
+
+cat('\014')
+data(women)
+print(women)
+model <- lm(weight~height,data=women)
+print(summary(model))
+eq <- coef(model)
+b0 <- eq[1]
+b1 <- eq[2]
+cat("Regression Equation : y=",b0,"+",b1,"x")
+ans <- predict(model,data.frame(height=65))
+cat("\nPredicted weight of a woman with a height of 65 inches = ",ans,"\n\n")
+predicted <- fitted(model)
+res <- residuals(model)
+result <- data.frame(Actual_Height=women$height,Actual_Weight=women$weight,Predicted_Weight=predicted,Residuals=res)
+print(result)
+
+
+# Q3. RAM vs Performance Score - Regression Diagnostics
+
+cat('\014')
+ram <- c(4,6,8,10,12,14,16,18)
+pscore <- c(45,52,60,67,73,78,84,88)
+df <- data.frame(ram,pscore)
+model <- lm(pscore~ram)
+print(coef(model))
+ans <- predict(model,data.frame(ram=75))
+cat("\nPredicted Website Loading Time when 75 users access the website simultaneously = ",ans)
+fit <- fitted(model)
+res <- residuals(model)
+plot(fit,res,main="Residuals vs Fitted Values",xlab="Fitted Values",ylab="Residuals")
+abline(h=0)
+qqnorm(res)
+qqline(res)
+hist(res)
+
+
+# Q4. Stopping Distance Prediction using Cars Dataset
+
+cat('\014')
+data(cars)
+model <- lm(dist~speed,data=cars)
+Speed <- c(10,15,20,25)
+Stopping_Distance <- predict(model,data.frame(speed=Speed))
+df <- data.frame(Speed,Stopping_Distance)
+print(df)
+plot(cars$speed,cars$dist,main="Stopping Distance vs Speed",xlab="Speed (mph)",ylab="Stopping Distance (miles)")
+abline(model)
+plot(model)
+
+
+# Q5. Ozone Prediction using Airquality Dataset
+
+cat('\014')
+data(airquality)
+head(airquality)
+df <- na.omit(airquality[,c("Ozone","Temp")])
+model <- lm(Ozone~Temp,data=df)
+print(summary(model))
+ans <- predict(model,data.frame(Temp=80))
+cat("\nOzone concentration when the temperature is 80°F = ",ans)
+plot(df$Temp,df$Ozone,main="Ozone Concentration vs Temperature",xlab="Temperature (°F)",ylab="Ozone Concentration",pch=19)
+abline(model)

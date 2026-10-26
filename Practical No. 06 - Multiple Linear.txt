@@ -1,0 +1,89 @@
+                Practical No. 06 - Multiple Linear Regression and Ridge Regression
+
+# Q1. Predict Exam Marks using Multiple Linear Regression
+
+cat('\014')
+student_data <- data.frame(
+StudyHours=c(2,3,4,5,6,7,8,9,10,11),
+Attendance=c(65,70,72,75,78,82,85,88,92,95),
+Assignment=c(55,60,65,70,72,78,80,85,88,92),
+ExamMarks=c(52,58,64,69,74,81,85,89,94,97)
+)
+print(student_data)
+model <- lm(ExamMarks~StudyHours+Attendance+Assignment,data=student_data)
+print(summary(model))
+new_student <- data.frame(StudyHours=8,Attendance=85,Assignment=82)
+answer <- predict(model,newdata=new_student)
+cat("\nPredicted Marks=",answer)
+
+
+# Q2. Predict House Price using Multiple Linear Regression
+
+cat('\014')
+HousePrice <- data.frame(
+Area=c(800,1000,1200,1400,1600,1800,2000,2200,2400,2600),
+Bedrooms=c(2,2,3,3,3,4,4,4,5,5),
+Age=c(20,18,15,12,10,8,7,5,4,2),
+Price=c(45,55,65,75,88,100,115,125,140,155)
+)
+print(HousePrice)
+model <- lm(Price~Area+Bedrooms+Age,data=HousePrice)
+print(summary(model))
+new_house <- data.frame(Area=1900,Bedrooms=4,Age=6)
+answer <- predict(model,newdata=new_house)
+cat("\nPredicted Price=",answer)
+
+
+# Q3. Multiple Linear Regression using mtcars Dataset
+
+cat('\014')
+data(mtcars)
+print(head(mtcars))
+model <- lm(mpg~hp+wt+disp,data=mtcars)
+print(summary(model))
+new_car <- data.frame(hp=120,wt=2.8,disp=200)
+answer <- predict(model,newdata=new_car)
+cat("\nPredicted MPG=",answer)
+
+
+# Q4. Ridge Regression using mtcars Dataset
+
+# Install package if required
+# install.packages("glmnet")
+
+cat('\014')
+library(glmnet)
+data(mtcars)
+x <- as.matrix(mtcars[,c("hp","wt","disp","qsec")])
+y <- mtcars$mpg
+ridge_model <- glmnet(x,y,alpha=0)
+print(ridge_model)
+cv_ridge <- cv.glmnet(x,y,alpha=0)
+cat("\n Optimum Lambda=",cv_ridge$lambda.min)
+plot(cv_ridge)
+cat("\nCoefficients\n")
+print(coef(cv_ridge,s="lambda.min"))
+
+
+# Q5. Ridge Regression using airquality Dataset
+
+# Install package if required
+# install.packages("glmnet")
+
+cat('\014')
+library(glmnet)
+data(airquality)
+air_data <- na.omit(airquality)
+x <- as.matrix(air_data[,c("Solar.R","Wind","Temp")])
+y <- air_data$Ozone
+ridge_model <- glmnet(x,y,alpha=0)
+print(ridge_model)
+cv_ridge <- cv.glmnet(x,y,alpha=0)
+cat("\nOptimum Lambda =",cv_ridge$lambda.min)
+plot(cv_ridge)
+cat("\nCoefficients\n")
+print(coef(cv_ridge,s="lambda.min"))
+new_data <- matrix(c(200,10,80),nrow=1)
+colnames(new_data) <- c("Solar.R","Wind","Temp")
+answer <- predict(cv_ridge,newx=new_data,s="lambda.min")
+cat("\nPredicted Ozone Concentration =",answer)

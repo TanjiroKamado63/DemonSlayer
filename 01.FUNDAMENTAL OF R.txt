@@ -1,0 +1,129 @@
+                                      01.FUNDAMENTAL OF R
+
+# Getting Help in R
+help(mean)
+?plot
+help.search("anova")
+??regression
+example("seq")
+help(package="ggplot2")
+?mtcars
+
+# Variable Assignment
+age <- 25
+name <- "ITCS"
+scores <- c(50,75,100)
+x = 10
+100 -> total_marks
+total_marks
+
+# Arithmetic Operations
+15 + 5
+15 - 5
+15 * 5
+15 / 5
+2^3
+sqrt(25)
+sqrt(50+50)
+5+2*10
+(5+2)*10
+
+# Vector Operations
+n <- c(4,9,16,25)
+n+2
+sqrt(n)
+a <- c(1,2,3)
+b <- c(10,20,30)
+a*b
+
+# Numerical Functions
+x <- 100
+log(x)
+log10(x)
+marks <- c(21,15,4,11,25)
+sort(marks)
+sort(marks,decreasing=TRUE)
+w <- c(55,82,63,71,90,68)
+max(w)
+min(w)
+range(w)
+length(w)
+d <- c(10,20,NA,40)
+max(d)
+max(d,na.rm=TRUE)
+
+# Descriptive Functions
+n <- c(2,3,4)
+sum(n)
+prod(n)
+obs <- c(10,15,20,25,30)
+var(obs)
+ages <- c(21,23,25,28,35,42,60)
+summary(ages)
+df <- data.frame(ID=1:4,Gender=c("M","F","F","F"))
+df
+dim(df)
+nrow(df)
+ncol(df)
+d <- c(10,20,NA,40)
+sum(d)
+sum(d,na.rm=TRUE)
+prod(d)
+prod(d,na.rm=TRUE)
+var(d)
+var(d,na.rm=TRUE)
+
+# Variable Types
+x <- 10.5
+y <- 42
+class(x)
+class(y)
+total <- 50L
+class(total)
+pass <- TRUE
+x <- (10>5)
+y <- (10<5)
+class(pass)
+class(x)
+class(y)
+x
+y
+name <- "ITCS"
+class(name)
+z <- 2+3i
+class(z)
+gender <- factor(c("Male","Female","Female","Male","Female"))
+gender
+levels(gender)
+class(gender)
+
+# Vectors
+numeric_vector <- c(2,5,3,6,8)
+name_vector <- c("DS","AI","WEB",".NET")
+mixed_vector <- c("DS",2.5,TRUE,2L,2+3i)
+class(numeric_vector)
+class(name_vector)
+class(mixed_vector)
+mixed_vector
+
+# Lists
+my_list <- list(id=101,name="Sales Report",scores=c(90,85,88),active=TRUE)
+my_list
+my_list$scores
+
+# Matrices
+my_matrix <- matrix(1:6,nrow=2,ncol=3)
+my_matrix
+my_matrix <- matrix(1:6,nrow=2,ncol=3,byrow=TRUE)
+my_matrix
+m <- matrix(1:6,nrow=3,ncol=2)
+dimnames(m) <- list(c("R1","R2","R3"),c("C1","C2"))
+m
+
+# Arrays
+my_array <- array(1:12,dim=c(2,3,2))
+my_array
+
+# Data Frames
+emp_df <- data.frame(EmpID=c(1,2,3),EmpName=c("John","Sara","Mike"))
+emp_df

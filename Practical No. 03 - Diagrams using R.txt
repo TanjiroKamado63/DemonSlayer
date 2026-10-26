@@ -1,0 +1,96 @@
+                      Practical No. 03 - Diagrams using R
+
+# Install Required Packages
+# install.packages("DiagrammeR")
+# install.packages("igraph")
+
+# Q1. Computer Hardware and Software Diagram
+
+cat('\014')
+library(DiagrammeR)
+grViz("
+digraph {
+Computer->Hardware
+Computer->Software
+Hardware->CPU
+Hardware->Memory
+Software->OS
+Software->Application
+}
+")
+
+
+# Q2. Student Marks Pass or Fail Diagram
+
+library(DiagrammeR)
+grViz("
+digraph {
+Start->Marks
+Marks->Check
+Check->Pass [label='Marks >= 40']
+Check->Fail [label='Marks < 40']
+Pass->End
+Fail->End
+}
+")
+
+
+# Q3. Directed Graph using igraph
+
+cat('\014')
+library(igraph)
+g <- graph_from_literal(
+A+-B,
+A-+C,
+B-+D,
+C+-D,
+D-+E
+)
+set.seed(10)
+plot(g,
+layout=layout_with_fr(g),
+vertex.color="cyan",
+vertex.frame.color="blue",
+vertex.frame.width=3,
+vertex.size=30,
+vertex.label.color="black",
+edge.color="black",
+edge.width=2,
+main="Directed Graph")
+
+
+# Q4. Login Validation Flowchart
+
+library(DiagrammeR)
+grViz("
+digraph {
+Start [label='START', shape=oval]
+Login [label='Enter Username\\nand Password', shape=box]
+Validate [label='Validate Login', shape=diamond]
+Dashboard [label='Dashboard', shape=box]
+Error [label='Invalid Login', shape=box]
+End [label='END', shape=oval]
+Start -> Login
+Login -> Validate
+Validate -> Dashboard [label='Valid']
+Validate -> Error [label='Invalid']
+Dashboard -> End
+Error -> End
+}
+")
+
+
+# Q5. Web Application Architecture Diagram
+
+cat('\014')
+library(DiagrammeR)
+grViz("
+digraph {
+node [shape=rectangle,style=dashed]
+edge [style=dashed]
+'Web Browser'->'Web Server'
+'Web Server'->'Application\\nServer'
+'Application\\nServer'->'Database\\nServer'
+'Application\\nServer'->'Payment\\nGateway'
+}
+")

@@ -1,0 +1,96 @@
+                        Practical No. 02 - Graphs using R
+
+# Q1. Line Graph - Students Attending Online Lecture
+
+cat('\014')
+days <- c("Monday","Tuesday","Wednesday","Thursday","Friday")
+students <- c(40,45,50,48,60)
+plot(students,type="o",xaxt="n",main="Students Attending Online Lecture",xlab="Day",ylab="Number of Students",pch=16)
+axis(1,at=1:5,labels=days)
+
+
+# Q2. Bar Graph - Students in IT Specializations
+
+cat('\014')
+specialization <- c("Data Science","Cyber Security","AI","Cloud Computing")
+students <- c(40,35,45,30)
+bar_pos <- barplot(students,names.arg=specialization,main="Students in IT Specializations",xlab="Specialization",ylab="Number of Students",ylim=c(0,50),col="cyan")
+text(x=bar_pos,y=students,labels=students,pos=3)
+
+
+# Q3. Pie Chart - Weekly Study Time
+
+cat('\014')
+subjects <- c("Programming","Database","Networking","Mathematics","Other")
+hours <- c(10,6,5,4,3)
+lab <- paste(subjects,"\n",hours)
+pie(hours,labels=lab,main="Weekly Study Time",col=rainbow(length(hours)))
+p <- round(hours/sum(hours)*100,2)
+lab <- paste(subjects,"\n",paste0("(",p,"%)"))
+pie(hours,labels=lab,main="Weekly Study Time",col=rainbow(length(hours)))
+
+
+# Q4. Histogram - Programming Marks
+
+cat('\014')
+marks <- c(45,55,60,62,65,67,70,72,74,75,76,78,80,82,84,85,88,90,92,95)
+h <- hist(marks,main="Distribution of Programming Marks",xlab="Marks",ylab="Frequency",ylim=c(0,7),breaks=5,col="lightgreen")
+text(x=h$mids,y=h$counts,labels=h$counts,pos=3)
+
+
+# Q5. Scatter Plot - Study Hours vs Programming Marks
+
+cat('\014')
+study_hours <- c(2,3,4,5,6,7,8,9)
+marks <- c(45,50,55,65,70,75,82,88)
+plot(study_hours,marks,main="Study Hours vs Programming Marks",xlab="Study Hours",ylab="Marks",xlim=c(0,10),ylim=c(0,100),pch=19,col="blue")
+
+
+# Q6. Box Plot - Subject-wise Marks Distribution
+
+cat('\014')
+programming <- c(55,60,65,68,70,72,75,80,85)
+database <- c(50,55,60,62,65,68,70,75,78)
+networking <- c(45,50,55,58,60,63,67,70,72)
+marks <- data.frame(programming,database,networking)
+boxplot(marks,main="Subject-wise Marks Distribution",xlab="Subjects",ylab="Marks",col=c("lightblue","lightgreen","lightyellow"))
+
+
+# Q7. Multiple Line Graph - Projects Completed by Teams
+
+cat('\014')
+months <- c("January","February","March","April")
+teamA <- c(5,7,8,10)
+teamB <- c(4,6,9,11)
+plot(teamA,type="o",pch=16,col="red",xaxt="n",ylim=c(0,12),main="Projects Completed by Teams",xlab="Month",ylab="Number of Projects")
+axis(1,at=1:4,labels=months)
+lines(teamB,type="o",pch=16,col="blue")
+legend("topleft",legend=c("Team A","Team B"),col=c("red","blue"),lty=1,pch=16)
+
+# Q8. Horizontal Bar Graph - Programming Languages
+
+cat('\014')
+languages <- c("Python","R","Java","C++","JavaScript")
+users <- c(45,30,35,25,40)
+par(mar=c(5,7,5,2))
+par(mgp=c(5,1,0))
+bar_pos <- barplot(users,names.arg=languages,horiz=TRUE,main="Programming Languages Used by Students",xlab="Number of Students",ylab="Programming Language",col="orange",xlim=c(0,50),las=1)
+text(x=users+2,y=bar_pos,labels=users,pos=4)
+
+
+# Q9. Dot Chart - Time Spent on IT Activities
+
+cat('\014')
+activity <- c("Coding","Reading","Project","Testing","Documentation")
+hours <- c(12,7,10,6,5)
+dotchart(hours,labels=activity,main="Time Spent on IT Activities",xlab="Hours")
+
+
+# Q10. Line Graph - Monthly Internet Data Usage
+
+cat('\014')
+month <- c("Jan","Feb","Mar","Apr","May","Jun")
+usage <- c(80,95,110,105,125,140)
+plot(usage,type="o",xaxt="n",main="Monthly Internet Data Usage",xlab="Month",ylab="Data Usage (GB)",pch=19)
+axis(1,at=1:6,labels=month)
+grid()
